@@ -66,6 +66,7 @@ def del_and_update():
     c.execute('SELECT * FROM stuffToPilot')
     [print(row) for row in c.fetchall()]
 
+graph_data()
 #create_table()
 #data_entry()
 
@@ -74,6 +75,6 @@ def del_and_update():
 #    time.sleep(1)
 #    print('writing')
 #read_from_db()
-del_and_update()
-c.close()
-conn.close()
+# del_and_update()
+# c.close()
+# conn.close()
