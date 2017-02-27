@@ -11,22 +11,22 @@ c=conn.cursor()
 
 def create_date_table():
     try:
-        c.execute('CREATE TABLE IF NOT EXISTS date_table(date_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,date_stamp TEXT NOT NULL)')
+        c.execute('CREATE TABLE IF NOT EXIST datetable(date_id INTEGER PRIMARY KEY AUTOINCREMENT,date_stamp TEXT NOT NULL)')
     except sqlite3.OperationalError:
         print("err in table create")
 def date_table_upd():
     tarih=datetime.date.today()
-    c.execute('INSERT INTO date_table(date_id,date_stamp) VALUES(?,?)',(0,tarih))
+    c.execute('INSERT INTO datetable(date_stamp) VALUES(?)',(tarih,))
     conn.commit()
 def read_from_db():
-    c.execute('SELECT * FROM date_table')
+    c.execute('SELECT * FROM datetable')
     data=c.fetchall()
     for row in data:
         print(row)
 
 create_date_table()
-date_table_upd()
-read_from_db()
+#date_table_upd()
+#read_from_db()
 c.close()
 conn.close()
 
