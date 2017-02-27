@@ -11,7 +11,7 @@ c=conn.cursor()
 
 def create_date_table():
     try:
-        c.execute('CREATE TABLE IF NOT EXIST datetable(date_id INTEGER PRIMARY KEY AUTOINCREMENT,date_stamp TEXT NOT NULL)')
+        c.execute('CREATE TABLE IF NOT EXISTS datetable(date_id INTEGER PRIMARY KEY AUTOINCREMENT,date_stamp TEXT NOT NULL)')
     except sqlite3.OperationalError:
         print("err in table create")
 def date_table_upd():
@@ -25,8 +25,8 @@ def read_from_db():
         print(row)
 
 create_date_table()
-#date_table_upd()
-#read_from_db()
+date_table_upd()
+read_from_db()
 c.close()
 conn.close()
 
