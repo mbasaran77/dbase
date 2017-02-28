@@ -24,8 +24,12 @@ def read_from_db():
     for row in data:
         print(row)
 
+def drop_table():
+    c.execute('drop table datetable')
+
 create_date_table()
 date_table_upd()
+# drop_table()
 read_from_db()
 c.close()
 conn.close()
