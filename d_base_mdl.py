@@ -15,22 +15,21 @@ class d_base():
         except sqlite3.OperationalError:
             print("err in table create")
     def delete_table(self,table_name):
-        name=(table_name,)
         try:
             self.c.execute('DROP TABLE  {tn}'.format(tn=table_name))
             print("db deleted")
         except sqlite3.OperationalError:
             print("err in table delete")
-    def insert_data(self,table_name,data_insert):
+    def insert_data(self,table_name,data_column_name,data_insert):
         rec_bact_id = 112
         rec_prg_id = 123
         rec_date = 1
         rec_time = 0
         rec_data = 4.5
         data_t =(rec_bact_id,rec_prg_id,rec_date,rec_time,rec_data)
-        self.c.execute('INSERT INTO {tn} VALUES (?,?,?,?,?)',data_t)
+        self.c.execute('INSERT INTO {tn}(batch_id,prg_id,date_stamp,time_stamp,{dn}) VALUES (?,?,?,?,?)'.format(tn=table_name,dn=data_column_name),data_t)
         self.conn.commit()
-
+        print("data inserted")
 
     def read_db(self):
         pass
@@ -42,7 +41,7 @@ vt = d_base()
 
 vt.create_table_rec_data('sicaklik_table',"isi")
 # vt.delete_table('sicaklik_table')
-vt
+vt.insert_data('sicaklik_table','isi',5.5)
 vt.close_db()
 
 
