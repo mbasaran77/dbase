@@ -11,17 +11,27 @@ class d_base():
 
         try:
             self.c.execute('CREATE TABLE IF NOT EXISTS {tn}(sicaklik_id INTEGER PRIMARY KEY AUTOINCREMENT, batch_id INTEGER,'
-                           'prg_id INTEGER, date_stamp STRING, time_stamp STRING, {dn} REAL)'.format(tn=table_name,dn=data_column_name))
+                           'prg_id INTEGER, date_stamp STRING, time_stamp STRING, {dn} REAL, FOREIGN KEY (prg_id) REFERENCES program_table(id))'.format(tn=table_name,dn=data_column_name))
             print("db created")
         except sqlite3.OperationalError:
             print("err in table create")
 
     def create_table_prg(self,table_name):
         try:
-            self.c.execute('CREATE TABLE IF NOT EXISTS {tn}(id INTEGER PRIMARY KEY AUTOINCREMENT, prg_name STRING)'.format(tn=table_name))
+            self.c.execute('CREATE TABLE IF NOT EXISTS {tn}(id INTEGER PRIMARY KEY AUTOINCREMENT, prg_name STRING NOT NULL UNIQUE)'.format(tn=table_name))
             print("prg table created")
         except sqlite3.OperationalError:
             print("err in prg table create")
+    def insert_table_prg(self,table_name,prg_name):
+        data_t = (prg_name,)
+        try:
+            self.c.execute('INSERT INTO {tn}(prg_name) VALUES (?)'.format(tn=table_name),data_t)
+            self.conn.commit()
+            print("data inserted")
+
+        except sqlite3.Error as e:
+            print("err in prg table insert",e.args[0])
+
     def delete_table(self,table_name):
         try:
             self.c.execute('DROP TABLE  {tn}'.format(tn=table_name))
@@ -34,7 +44,7 @@ class d_base():
         tarih = datetime.datetime.strftime(an, '%x')
         saat = datetime.datetime.strftime(an, '%X')
         rec_bact_id = 112
-        rec_prg_id = 123
+        rec_prg_id = 2 # burada çalışan program_sorgulanıp id nin alınması gerek şimdilik el ile yazıldı
         rec_date = tarih
         rec_time = saat
         rec_data = data_insert
@@ -55,14 +65,27 @@ class d_base():
 
 vt = d_base()
 
-vt.create_table_rec_data('sicaklik_table',"isi")
+vt.create_table_rec_data('oven_1_act',"act_temp")
+vt.create_table_rec_data('oven_2_act',"act_temp")
+vt.create_table_rec_data('speed_act',"act_speed")
+vt.create_table_rec_data('counter_act','act_counter')
+vt.create_table_rec_data('oven_1_set',"set_temp")
+vt.create_table_rec_data('oven_2_set',"set_temp")
+vt.create_table_rec_data('speed_set',"set_speed")
+vt.create_table_rec_data('counter_set','set_counter')
+
+
+# vt.delete_table('program_table')
 # vt.delete_table('sicaklik_table')
+
 vt.create_table_prg('program_table')
-vt.insert_data('sicaklik_table','isi',5.5)
+# vt.insert_data('sicaklik_table','isi',5.5)
 
-a = vt.view_data('sicaklik_table')
+# vt.insert_table_prg('program_table','alaca_desen')
+# a = vt.view_data('sicaklik_table')
+# print(a)
+a = vt.view_data('program_table')
 print(a)
-
 
 vt.close_db()
 
