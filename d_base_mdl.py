@@ -43,7 +43,7 @@ class d_base():
         an = datetime.datetime.now()
         tarih = datetime.datetime.strftime(an, '%x')
         saat = datetime.datetime.strftime(an, '%X')
-        rec_bact_id = 112
+        rec_bact_id = 115
         rec_prg_id = 2 # burada çalışan program_sorgulanıp id nin alınması gerek şimdilik el ile yazıldı
         rec_date = tarih
         rec_time = saat
@@ -63,31 +63,31 @@ class d_base():
     def close_db(self):
         self.conn.close()
 
-vt = d_base()
-
-vt.create_table_rec_data('oven_1_act',"act_temp")
-vt.create_table_rec_data('oven_2_act',"act_temp")
-vt.create_table_rec_data('speed_act',"act_speed")
-vt.create_table_rec_data('counter_act','act_counter')
-vt.create_table_rec_data('oven_1_set',"set_temp")
-vt.create_table_rec_data('oven_2_set',"set_temp")
-vt.create_table_rec_data('speed_set',"set_speed")
-vt.create_table_rec_data('counter_set','set_counter')
-
-
+# vt = d_base()
+#
+# vt.create_table_rec_data('oven_1_act',"act_temp")
+# vt.create_table_rec_data('oven_2_act',"act_temp")
+# vt.create_table_rec_data('speed_act',"act_speed")
+# vt.create_table_rec_data('counter_act','act_counter')
+# vt.create_table_rec_data('oven_1_set',"set_temp")
+# vt.create_table_rec_data('oven_2_set',"set_temp")
+# vt.create_table_rec_data('speed_set',"set_speed")
+# vt.create_table_rec_data('counter_set','set_counter')
+#
+#
 # vt.delete_table('program_table')
 # vt.delete_table('sicaklik_table')
-
-vt.create_table_prg('program_table')
+#
+# vt.create_table_prg('program_table')
 # vt.insert_data('sicaklik_table','isi',5.5)
-
+#
 # vt.insert_table_prg('program_table','alaca_desen')
 # a = vt.view_data('sicaklik_table')
 # print(a)
-a = vt.view_data('program_table')
-print(a)
-
-vt.close_db()
+# a = vt.view_data('program_table')
+# print(a)
+#
+# vt.close_db()
 
 
 
