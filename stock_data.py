@@ -10,17 +10,19 @@ import matplotlib
 matplotlib.style.use('ggplot')
 
 start = datetime.datetime(2016,5,25)
-end  = datetime.datetime(2017,5,26)
-f = web.DataReader(['OZKGY'],'google',start,end)
-ls_key = 'Close'
+end  = datetime.datetime(2017,6,5)
+f = web.DataReader(['KATMR'],'google',start,end)
+
 print(f.keys())
-cleanData = f.ix[ls_key]
-dataFrame = DataFrame(cleanData)
 
-#plt.figure()
-dataFrame.plot()
+
+dataFrame = DataFrame(f.ix['Close'])
+
+dataFrame1 = DataFrame(f.ix['Volume'])
+
+plt.figure(1)
+plt.subplot(211)
+plt.plot(dataFrame)
+plt.subplot(212)
+plt.plot(dataFrame1)
 plt.show()
-#plt.plot(dataFrame)
-#plt.show()
-print(dataFrame)
-
