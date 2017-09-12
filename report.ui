@@ -37,6 +37,16 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2017</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
+         </property>
         </widget>
        </item>
        <item>
@@ -70,6 +80,16 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="dateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2017</year>
+           <month>1</month>
+           <day>1</day>
+          </datetime>
          </property>
         </widget>
        </item>

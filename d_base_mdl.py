@@ -1,5 +1,7 @@
 import sqlite3
 import datetime
+
+
 class d_base():
     def __init__(self):
         self.conn = sqlite3.connect('vpdata.db')
